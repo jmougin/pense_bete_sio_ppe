@@ -1,0 +1,42 @@
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LL_Fond"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <EditText
+        android:id="@+id/titre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="40dp"
+        android:layout_y="18dp"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/contenu"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_x="40dp"
+        android:layout_y="80dp"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/DateExpi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_x="41dp"
+        android:layout_y="137dp"
+        android:ems="10"
+        android:inputType="date" >
+
+        <requestFocus />
+    </EditText>
+
+    <Spinner
+        android:id="@+id/importance"
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:layout_x="74dp"
+        android:layout_y="270dp" />
+
+</AbsoluteLayout>
