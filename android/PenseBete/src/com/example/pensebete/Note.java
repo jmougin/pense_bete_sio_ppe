@@ -2,6 +2,8 @@ package com.example.pensebete;
 
 import java.util.ArrayList;
 
+
+
 public class Note {
 	
 	private int id;
@@ -11,6 +13,8 @@ public class Note {
 	private String dateExpi;
 	private String importance;
 	
+	private ArrayList<Note> lesNotes;
+	
 	
 	/**
 	 * Constructeur de la note
@@ -18,12 +22,27 @@ public class Note {
 	 */
 	public Note(String t){
 		this.setTitre(t);
-		this.setContenu("Détail de la note ...");
+		this.setContenu("Contenu de la note...");
+		
+		lesNotes = new ArrayList<Note>();
 	}
 	
 	public Note() {
 	}
 
+	
+	public ArrayList<Note> getAujourdhui(){
+		ArrayList<Note> aujourdhui = new ArrayList<Note>();
+		for (Note note : this.lesNotes) {
+			
+				aujourdhui.add(note);
+			
+		}
+		return aujourdhui;
+	}
+	
+	
+	
 	public String getTitre() {
 		return titre;
 	}

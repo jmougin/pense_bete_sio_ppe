@@ -12,34 +12,45 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pensebete.*;
 import com.example.pensebete.NoteAdapter.NotesAdapterListener;
 
 public class PenseBeteActivity extends Activity implements NotesAdapterListener{
 
-	private ArrayList<Note> lesNotes;
-	private NoteAdapter adapter;
+	private ArrayList<ArrayList> ToutesNotes;
+	private ExpListDateAdapter adapter;
+	private ExpandableListView expandableList = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	Log.w("Message", "onCreate de l'application");
-    	
+
+    	LaDate uneDate = new LaDate("Aujourdhui");
+    	ToutesNotes = new ArrayList<ArrayList>();
     	// Création d'une liste de note test
-    	lesNotes=new ArrayList<Note>();
+    	ArrayList<Note> lesNotes=new ArrayList<Note>();
     	lesNotes.add(new Note("Anniversaire"));
     	lesNotes.add(new Note("Médecin"));
     	lesNotes.add(new Note("Morgue"));
     	
+    	uneDate.setLesNotes(lesNotes);
+
+    	ToutesNotes.add(uneDate.getAujourdhui());
+    	ToutesNotes.add(uneDate.getAujourdhui());
+		
     	// XML -------------------------------------------------------------
     	//XMLNoteCreator writerXml = new XMLNoteCreator("lesVilles.xml");
     	//writerXml.saveVillesIntoXML(lesNotes);
     	// -----------------------------------------------------------------
     
     	super.onCreate(savedInstanceState);
+    	/*
         setContentView(R.layout.activity_main);
     	
     	adapter = new NoteAdapter(this, lesNotes);
@@ -50,7 +61,18 @@ public class PenseBeteActivity extends Activity implements NotesAdapterListener{
         
         //Initialisation de la liste avec les données
         list.setAdapter(adapter);
-        
+        */
+    	
+    	setContentView(R.layout.detail_note_layout);
+    	
+    	expandableList = (ExpandableListView) findViewById(R.id.expandableListView1);
+		
+		adapter = new ExpListDateAdapter(this, ToutesNotes);
+		//ListView list = (ListView)findViewById(R.id.ListView01);
+		expandableList.setAdapter(adapter);
+		
+		registerForContextMenu(expandableList);
+    	
         //registerForContextMenu(list);
     	
     }
@@ -74,7 +96,7 @@ public class PenseBeteActivity extends Activity implements NotesAdapterListener{
         adb.setView(alertDialogView);
  
         //On donne un titre à l'AlertDialog
-        adb.setTitle("Informations sur la ville de " + item.getId());
+        adb.setTitle("Pense Bete " + item.getId());
         
         EditText nbG = (EditText)alertDialogView.findViewById(R.id.titre);
         nbG.setText(""+item.getTitre()+"");
